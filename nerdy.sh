@@ -4,7 +4,7 @@ page=$(mktemp)
 download_selections=$(mktemp)
 
 # download and parse releases page of nerd fonts
-curl https://github.com/ryanoasis/nerd-fonts/releases > "$page"
+curl -L https://github.com/ryanoasis/nerd-fonts/releases/latest > "$page"
 
 # NOTE: This script will stop working when the layout of github releases page changes.
 # In case the script has stopped working,

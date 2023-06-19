@@ -6,10 +6,10 @@ download_selections=$(mktemp)
 # download and parse releases page of nerd fonts
 curl -L https://github.com/ryanoasis/nerd-fonts/releases/latest > "$page"
 
-# NOTE: This script will stop working when the layout of github releases page changes.
+# NOTE: This script may stop working when the layout of github releases page changes.
 # In case the script has stopped working,
-# curl the page and see what is the starting and ending lines of the table 
-# which contains the download links to see if it works again.
+# curl the page manually and see the starting and ending lines of the table 
+# containing the download links... to see if it works again.
 starting_line="<table>"
 ending_line="<\/table><\/details><\/div>"
 sed -i -n '/^'"$starting_line"'$/,$p;/^'"$ending_line"'$/q' "$page"
@@ -47,5 +47,7 @@ while read -r selection ; do
 done < "$download_selections"
 
 rm "$page"
+rm "$download_selections"
+
 # refresh font cache
 fc-cache
